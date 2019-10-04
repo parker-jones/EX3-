@@ -55,3 +55,47 @@ subplot(1,2,1)
 imshow(cap_img)
 title("Image 1 vs. Image 2", loc = "left", fontsize = 25, fontweight = "bold")
 axis("off")
+
+#Part B
+###
+"""
+circular_rotations(img_matrix, p)
+
+Given an image and the desired number of pixels to shift the image by,
+the function will return the  shifted image.
+
+= PARAMETERS
+
+- img_matrix is a an image's matrix
+
+- p is an integer that expresses the desired number of pixels to
+shift the image by
+
+= RETURNS
+
+- new_img is the new matrix with the red channel shifted by the desired number of pixels
+
+"""
+function circular_rotations(img_matrix, p)
+    green = img_matrix[:,:,2]
+    blue = img_matrix[:,:,3]
+    alpha = img_matrix[:,:,4]
+    img_matrix_R = img_matrix[:,:,1]
+    addition = img_matrix_R[1:p, :]
+    new_red = vcat(img_matrix_R, addition)
+    cut_new_red = new_red[p+1:end, :]
+    new_img = ones(size(img_matrix)[1], size(img_matrix)[2], size(img_matrix)[3])
+    new_img[:,:, 1] = cut_new_red
+    new_img[:,:, 2] = green
+    new_img[:,:, 3] = blue
+    new_img[:,:, 4] = alpha
+    imshow(new_img)
+end
+###
+subplot(1,2,2)
+imshow(cap_img)
+axis("off")
+subplot(1,2,1)
+circular_rotations(cap_img, 180)
+axis("off")
+title("Rotated Red Channel Image vs. Original Image", loc = "left", fontsize = 10, fontweight = "bold")
