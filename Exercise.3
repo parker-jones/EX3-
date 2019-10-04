@@ -31,7 +31,27 @@ function extract_RGB(filename)
     R = image_name[:,:,1]
     G = image_name[:,:,2]
     B = image_name[:,:,3]
+    println("Reset with git reset --mixed")
     return R,G,B
 end
 R , G , B = extract_RGB("el-capitan.png")
-### 
+###
+
+#Part A Bullet e
+R = cap_img[:,:,1];
+G = cap_img[:,:,2];
+B = cap_img[:,:,3];
+
+image2 = ones(360,640,3);
+image2[:,:,1] = G;
+image2[:,:,2] = B;
+image2[:,:,3] = R;
+
+figure(figsize=[100,100])
+subplot(1,2,2)
+imshow(image2)
+axis("off")
+subplot(1,2,1)
+imshow(cap_img)
+title("Image 1 vs. Image 2", loc = "left", fontsize = 25, fontweight = "bold")
+axis("off")
